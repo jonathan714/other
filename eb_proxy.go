@@ -25,9 +25,10 @@ func main() {
 	proxy := goproxy.NewProxyHttpServer()
 	proxy.Verbose = false
 	proxy.OnResponse().DoFunc(func(resp *http.Response, ctx *goproxy.ProxyCtx) *http.Response {
+		log.Println("====> URL:", ctx.Req.URL)
 		if (ctx.Req.URL.Host == "lpn.ebopark.com") && (ctx.Req.URL.Path == "/orders/getChargeOrderNo") {
 			body, _ := ioutil.ReadAll(resp.Body)
-			bodyString := strings.Replace(string(body), ":200.0,", ":20.0,", 1)
+			bodyString := strings.Replace(string(body), ":200.0,", ":10.0,", 1)
 			resp.Body = ioutil.NopCloser(bytes.NewBufferString(bodyString))
 			resp.ContentLength = int64(len(bodyString))
 			log.Println("====> Body:", bodyString)
