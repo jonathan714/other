@@ -2,7 +2,7 @@
 使用说明：
 1、安装go。brew install golang
 2、安装依赖包。go get github.com/elazarl/goproxy
-3、运行。go run eb_proxy.go
+3、运行此文件代码。go run eb_proxy.go
 4、设置手机 wifi 代理服务器为本机 IP，端口 8848
 5、应用中充值 200 支付及可。
 
