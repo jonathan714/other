@@ -26,7 +26,7 @@ func main() {
 	proxy.Verbose = false
 	proxy.OnResponse().DoFunc(func(resp *http.Response, ctx *goproxy.ProxyCtx) *http.Response {
 		log.Println("====> URL:", ctx.Req.URL)
-		if (ctx.Req.URL.Host == "lpn.ebopark.com") && (ctx.Req.URL.Path == "/orders/getChargeOrderNo") {
+		if strings.EqualFold(ctx.Req.URL.Host, "lpn.ebopark.com") && strings.EqualFold(ctx.Req.URL.Path, "/orders/getChargeOrderNo") {
 			body, _ := ioutil.ReadAll(resp.Body)
 			bodyString := strings.Replace(string(body), ":200.0,", ":10.0,", 1)
 			resp.Body = ioutil.NopCloser(bytes.NewBufferString(bodyString))
